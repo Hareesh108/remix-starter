@@ -29,7 +29,7 @@ export default function User() {
   console.log(user, "user");
 
   const handleNavigate = () => {
-    navigate(`/new`);
+    navigate(`/`);
     localStorage.removeItem("userLogged");
   };
 

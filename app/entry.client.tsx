@@ -7,11 +7,8 @@
 import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
-import { supportsVibrationAPI } from "./check.client";
 
 startTransition(() => {
-  console.log(supportsVibrationAPI, "supportsVibrationAPI");
-
   hydrateRoot(
     document,
     <StrictMode>

@@ -1,6 +1,7 @@
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
-import { addUser, findUserByEmailPassword } from "users";
+import { Form, useActionData, useNavigate } from "@remix-run/react";
+import { useEffect } from "react";
+import { addUser, findUserByEmailPassword, User } from "users";
 import { v4 as uuidv4 } from "uuid";
 
 export const meta: MetaFunction = () => {
@@ -8,6 +9,11 @@ export const meta: MetaFunction = () => {
     { title: "New Remix App" },
     { name: "description", content: "Welcome to Hareesh's Remix!" },
   ];
+};
+
+type ActionData = {
+  error?: string;
+  user?: User;
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -43,8 +49,18 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 export default function Index() {
-  const data = useActionData<typeof action>();
+  const data = useActionData<ActionData>();
+  const navigate = useNavigate();
+
   console.log(data, "data");
+  console.log(navigate, "navigate");
+
+  useEffect(() => {
+    if (data?.user) {
+      localStorage.setItem("userLogged", JSON.stringify(data.user));
+      navigate(`/user/${data.user.id}`);
+    }
+  }, [data, navigate]);
 
   return (
     <div className="flex h-screen items-center flex-col justify-center">

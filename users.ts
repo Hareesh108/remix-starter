@@ -33,7 +33,7 @@ export const addUser = (user:User) => {
         users.push(user)
     }
 }
-// export const findUser = (id:string) => {}
+export const findUser = (id:string) => users.find((u)=> u.id === id)
 export const findUserByEmailPassword = (email:string,password:string) =>  users.find((u)=> u.email === email && u.password === password)
 
 // export const deleteUser = (id:string) => {}

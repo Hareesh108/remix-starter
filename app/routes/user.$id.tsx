@@ -27,7 +27,6 @@ export default function User() {
   const navigate = useNavigate();
 
   console.log(user, "user");
-  4;
 
   const handleNavigate = () => {
     navigate(`/new`);
